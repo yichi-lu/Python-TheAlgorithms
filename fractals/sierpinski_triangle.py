@@ -1,4 +1,6 @@
 """
+https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle
+
 Author Anurag Kumar | anuragkumarak95@gmail.com | git/anuragkumarak95
 
 Simple example of fractal generation using recursion.

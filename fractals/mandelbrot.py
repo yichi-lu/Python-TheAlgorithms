@@ -1,4 +1,6 @@
 """
+https://en.wikipedia.org/wiki/Mandelbrot_set
+
 The Mandelbrot set is the set of complex numbers "c" for which the series
 "z_(n+1) = z_n * z_n + c" does not diverge, i.e. remains bounded. Thus, a
 complex number "c" is a member of the Mandelbrot set if, when starting with
@@ -53,11 +55,11 @@ def get_black_and_white_rgb(distance: float) -> tuple:
     Black&white color-coding that ignores the relative distance. The Mandelbrot
     set is black, everything else is white.
 
-    >>> get_black_and_white_rgb(0)
+    >>> get_black_and_white_rgb(0)                         # white
     (255, 255, 255)
-    >>> get_black_and_white_rgb(0.5)
+    >>> get_black_and_white_rgb(0.5)                       # white
     (255, 255, 255)
-    >>> get_black_and_white_rgb(1)
+    >>> get_black_and_white_rgb(1)                         # black
     (0, 0, 0)
     """
     if distance == 1:
@@ -71,11 +73,11 @@ def get_color_coded_rgb(distance: float) -> tuple:
     Color-coding taking the relative distance into account. The Mandelbrot set
     is black.
 
-    >>> get_color_coded_rgb(0)
+    >>> get_color_coded_rgb(0)                             # red
     (255, 0, 0)
-    >>> get_color_coded_rgb(0.5)
+    >>> get_color_coded_rgb(0.5)                           # cyan
     (0, 255, 255)
-    >>> get_color_coded_rgb(1)
+    >>> get_color_coded_rgb(1)                             # black
     (0, 0, 0)
     """
     if distance == 1:
@@ -111,15 +113,16 @@ def get_image(
     img = Image.new("RGB", (image_width, image_height))
     pixels = img.load()
 
+    figure_height = figure_width / image_width * image_height
     # loop through the image-coordinates
     for image_x in range(image_width):
         for image_y in range(image_height):
             # determine the figure-coordinates based on the image-coordinates
-            figure_height = figure_width / image_width * image_height
             figure_x = figure_center_x + (image_x / image_width - 0.5) * figure_width
             figure_y = figure_center_y + (image_y / image_height - 0.5) * figure_height
 
             distance = get_distance(figure_x, figure_y, max_step)
+            print(f"distance: {distance}")
 
             # color the corresponding pixel based on the selected coloring-function
             if use_distance_color_coding:
@@ -146,6 +149,6 @@ if __name__ == "__main__":
     # img = get_image(use_distance_color_coding = False)
 
     # uncomment to save the image
-    # img.save("mandelbrot.png")
+    img.save("mandelbrot.png")
 
-    img.show()
+#   img.show()

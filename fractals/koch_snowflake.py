@@ -1,4 +1,6 @@
 """
+https://en.wikipedia.org/wiki/Koch_snowflake
+
 Description
     The Koch snowflake is a fractal curve and one of the earliest fractals to
     have been described. The Koch snowflake can be built up iteratively, in a
@@ -104,7 +106,8 @@ def plot(vectors: list[numpy.ndarray]) -> None:
     # zip()
     x_coordinates, y_coordinates = zip(*vectors)
     plt.plot(x_coordinates, y_coordinates)
-    plt.show()
+#   plt.show()
+    plt.savefig("koch.pdf", dpi=300)
 
 
 if __name__ == "__main__":

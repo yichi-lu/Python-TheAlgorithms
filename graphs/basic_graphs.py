@@ -6,8 +6,8 @@ def _input(message):
 
 
 def initialize_unweighted_directed_graph(
-    node_count: int, edge_count: int
-) -> dict[int, list[int]]:
+    node_count: int, edge_count: int) -> dict[int, list[int]]:
+
     graph: dict[int, list[int]] = {}
     for i in range(node_count):
         graph[i + 1] = []
@@ -19,8 +19,8 @@ def initialize_unweighted_directed_graph(
 
 
 def initialize_unweighted_undirected_graph(
-    node_count: int, edge_count: int
-) -> dict[int, list[int]]:
+    node_count: int, edge_count: int) -> dict[int, list[int]]:
+
     graph: dict[int, list[int]] = {}
     for i in range(node_count):
         graph[i + 1] = []
@@ -33,8 +33,8 @@ def initialize_unweighted_undirected_graph(
 
 
 def initialize_weighted_undirected_graph(
-    node_count: int, edge_count: int
-) -> dict[int, list[tuple[int, int]]]:
+    node_count: int, edge_count: int) -> dict[int, list[tuple[int, int]]]:
+
     graph: dict[int, list[tuple[int, int]]] = {}
     for i in range(node_count):
         graph[i + 1] = []
@@ -47,7 +47,7 @@ def initialize_weighted_undirected_graph(
 
 
 if __name__ == "__main__":
-    n, m = (int(i) for i in _input("Number of nodes and edges: "))
+    n, m = (int(i) for i in _input("One number for number of nodes and another for number of edges: "))
 
     graph_choice = int(
         _input(

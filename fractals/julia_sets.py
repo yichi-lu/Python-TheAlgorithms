@@ -1,5 +1,7 @@
 """Author Alexandre De Zotti
 
+https://en.wikipedia.org/wiki/Julia_set
+
 Draws Julia sets of quadratic polynomials and exponential maps.
  More specifically, this iterates the function a fixed number of times
  then plots whether the absolute value of the last iterate is greater than
@@ -131,6 +133,7 @@ def show_results(
     function_params: Any,
     escape_radius: float,
     z_final: numpy.ndarray,
+    figname: str = "",
 ) -> None:
     """
     Plots of whether the absolute value of z_final is greater than
@@ -144,7 +147,10 @@ def show_results(
     abs_z_final[:, :] = abs_z_final[::-1, :]
     pyplot.matshow(abs_z_final < escape_radius)
     pyplot.title(f"Julia set of ${function_label}$, $c={function_params}$")
-    pyplot.show()
+    if figname:
+        pyplot.savefig(figname, dpi=300)
+    else:
+        pyplot.show()
 
 
 def ignore_overflow_warnings() -> None:
@@ -183,7 +189,7 @@ if __name__ == "__main__":
         z_0,
         infinity=1.1 * escape_radius,
     )
-    show_results("z^2+c", c_cauliflower, escape_radius, z_final)
+    show_results("z^2+c", c_cauliflower, escape_radius, z_final, "caulifower.pdf")
 
     nb_iterations = 64
     escape_radius = 2 * abs(c_polynomial_1) + 1
@@ -194,7 +200,7 @@ if __name__ == "__main__":
         z_0,
         infinity=1.1 * escape_radius,
     )
-    show_results("z^2+c", c_polynomial_1, escape_radius, z_final)
+    show_results("z^2+c", c_polynomial_1, escape_radius, z_final, "polynomial_1.pdf")
 
     nb_iterations = 161
     escape_radius = 2 * abs(c_polynomial_2) + 1
@@ -205,7 +211,7 @@ if __name__ == "__main__":
         z_0,
         infinity=1.1 * escape_radius,
     )
-    show_results("z^2+c", c_polynomial_2, escape_radius, z_final)
+    show_results("z^2+c", c_polynomial_2, escape_radius, z_final, "polynomial_2.pdf")
 
     nb_iterations = 12
     escape_radius = 10000.0
@@ -216,4 +222,4 @@ if __name__ == "__main__":
         z_0 + 2,
         infinity=1.0e10,
     )
-    show_results("e^z+c", c_exponential, escape_radius, z_final)
+    show_results("e^z+c", c_exponential, escape_radius, z_final, "exponential.pdf")
